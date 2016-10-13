@@ -68,11 +68,6 @@ def check_bullet_alien_collisions(si_settings, screen, ship, aliens, bullets):
     # Check for bullet/alien collisions and remove any relevant bullets and aliens
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
-    if len(aliens) == 0:
-        # Destroy existing bullets and create a new fleet
-        bullets.empty()
-        create_fleet(si_settings, screen, ship, aliens)
-
 
 def fire_bullet(si_settings, screen, ship, bullets):
     # Create a new bullet and add it to the bullets group
@@ -146,6 +141,11 @@ def change_fleet_direction(si_settings, aliens):
 
 
 def update_aliens(si_settings, stats, screen, ship, aliens, bullets):
+    if len(aliens) == 0:
+        # Destroy existing bullets and create a new fleet
+        bullets.empty()
+        create_fleet(si_settings, screen, ship, aliens)
+
     # Check if fleet is at an edge, then update fleet positions
     check_fleet_edges(si_settings, aliens)
     aliens.update()
@@ -170,6 +170,7 @@ def ship_hit(si_settings, stats, screen, ship, aliens, bullets):
         
         # Pause
         sleep(0.5)
+        
         # Create a new fleet and center the ship
         create_fleet(si_settings, screen, ship, aliens)
         ship.center_ship()
