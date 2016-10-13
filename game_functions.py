@@ -167,13 +167,12 @@ def ship_hit(si_settings, stats, screen, ship, aliens, bullets):
         # Empty the list of aliens and bullets
         aliens.empty()
         bullets.empty()
-
+        
+        # Pause
+        sleep(0.5)
         # Create a new fleet and center the ship
         create_fleet(si_settings, screen, ship, aliens)
         ship.center_ship()
-
-        # Pause
-        sleep(0.5)
 
     else:
         stats.game_active = False
